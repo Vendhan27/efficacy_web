@@ -1,4 +1,5 @@
 import { getTeam } from '../data/dataService';
+import BackButton from '../components/BackButton';
 import './Team.css';
 
 const SECTIONS = ['Faculty Coordinators', 'Student Coordinators', 'IT Wing', 'Volunteers'];
@@ -11,6 +12,7 @@ export default function Team() {
       <div className="page-hero">
         <div className="page-hero-bg"></div>
         <div className="container">
+          <BackButton />
           <h1 className="page-hero-title">Our Team</h1>
           <p className="page-hero-subtitle">The people behind <span className="golden-text" style={{fontWeight: 600}}>EFFICACY'26</span></p>
         </div>

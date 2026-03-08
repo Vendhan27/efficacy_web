@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getEvents } from '../data/dataService';
+import BackButton from '../components/BackButton';
 import './Events.css';
 
 export default function Events() {
@@ -14,6 +15,7 @@ export default function Events() {
       <div className="page-hero">
         <div className="page-hero-bg"></div>
         <div className="container">
+          <BackButton />
           <h1 className="page-hero-title">Events</h1>
           <p className="page-hero-subtitle">Compete, collaborate, and conquer</p>
         </div>

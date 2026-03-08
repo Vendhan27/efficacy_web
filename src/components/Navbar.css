@@ -92,7 +92,7 @@
   position: relative;
   padding: var(--space-2) var(--space-3);
   font-size: var(--text-sm);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-bold);
   color: var(--text-secondary);
   transition: color var(--transition-fast);
   border-radius: var(--radius-md);

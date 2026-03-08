@@ -1,0 +1,47 @@
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.back-button:hover {
+  background: var(--bg-hover);
+  color: var(--primary);
+  transform: translateX(-4px);
+  border-color: var(--primary);
+}
+
+.back-button svg {
+  transition: transform var(--transition-base);
+}
+
+.back-button:hover svg {
+  transform: translateX(-2px);
+}
+
+[data-theme="dark"] .back-button {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .back-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Ensure container handling if added at the top of sections */
+.container > .back-button {
+  margin-top: 2rem;
+}

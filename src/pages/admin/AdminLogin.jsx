@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../data/dataService';
+import BackButton from '../../components/BackButton';
 import './AdminLogin.css';
 
 export default function AdminLogin() {
@@ -26,6 +27,9 @@ export default function AdminLogin() {
 
   return (
     <div className="admin-login-page">
+      <div style={{ position: 'absolute', top: '2rem', left: '2rem', zIndex: 10 }}>
+        <BackButton />
+      </div>
       <div className="admin-login-bg">
         <div className="admin-login-glow-1"></div>
         <div className="admin-login-glow-2"></div>

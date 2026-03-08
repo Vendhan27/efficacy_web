@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { getEvent } from '../data/dataService';
+import BackButton from '../components/BackButton';
 import './Events.css';
 
 export default function EventDetail() {
@@ -11,7 +12,7 @@ export default function EventDetail() {
       <div className="event-detail-page">
         <div className="section container" style={{ textAlign: 'center', paddingTop: '4rem' }}>
           <h2>Event not found</h2>
-          <Link to="/events" className="btn btn-primary" style={{ marginTop: '1rem' }}>← Back to Events</Link>
+          <BackButton />
         </div>
       </div>
     );
@@ -23,7 +24,7 @@ export default function EventDetail() {
     <div className="event-detail-page">
       <div className="section">
         <div className="container">
-          <Link to="/events" className="event-back-btn">← Back to Events</Link>
+          <BackButton />
           <div className="event-detail">
             <div className="event-detail-poster">
               {event.poster ? (
