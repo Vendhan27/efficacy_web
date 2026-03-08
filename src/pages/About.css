@@ -1,0 +1,105 @@
+/* ===== SHARED PAGE HERO ===== */
+.page-hero {
+  position: relative;
+  padding: calc(var(--navbar-height) + var(--space-16)) 0 var(--space-12);
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8eef8 50%, #fff5eb 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+[data-theme="dark"] .page-hero {
+  background: var(--bg-hero);
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+}
+
+.page-hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-extrabold);
+  color: var(--primary);
+  margin-bottom: var(--space-3);
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+[data-theme="dark"] .page-hero-title {
+  color: #ffffff;
+}
+
+.page-hero-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  animation: fadeInUp 0.7s ease 0.2s both;
+}
+
+[data-theme="dark"] .page-hero-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== ABOUT BLOCKS ===== */
+.about-block {
+  display: flex;
+  gap: var(--space-8);
+  padding: var(--space-10);
+  margin-bottom: var(--space-8);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-2xl);
+  transition: all var(--transition-base);
+}
+
+.about-block:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-cyan);
+}
+
+.about-block-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-xl);
+}
+
+.about-block-content {
+  flex: 1;
+}
+
+.about-block-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-block-content p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-3);
+}
+
+@media (max-width: 768px) {
+  .about-block {
+    flex-direction: column;
+    padding: var(--space-6);
+    gap: var(--space-4);
+  }
+  .page-hero-title {
+    font-size: var(--text-4xl);
+  }
+}
