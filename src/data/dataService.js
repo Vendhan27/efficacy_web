@@ -26,12 +26,12 @@ function generateId() {
 
 // ===== SEED DATA =====
 const SEED_EVENTS = [
-  { id: 'ev1', name: 'Paper Presentation', category: 'Tech', description: 'Present your innovative ideas and research papers on emerging technologies in Mechanical Engineering. Showcase your knowledge and communication skills.', rules: '1. Team of 2 members\n2. Time limit: 8+2 minutes\n3. Abstract must be submitted prior\n4. PPT must be original work\n5. Topics related to Mechanical Engineering only', poster: '', coordinator: 'Arun Kumar S', phone: '9876543210', createdAt: '2026-01-15', eventType: 'Team', isVisible: true, registrationEnabled: true },
-  { id: 'ev2', name: '3D CAD Modeling (Design Challenge)', category: 'Tech', description: 'Put your CAD skills to the test! Design complex components and assemblies using industry-standard software. Speed, accuracy, and design intent will be judged.', rules: '1. Individual event\n2. Software: SolidWorks / Fusion 360 / AutoCAD\n3. Time limit: 60 minutes\n4. 2D drafting to 3D model conversion\n5. Bring your own laptop (optional but recommended)', poster: '', coordinator: 'Priya M', phone: '9876543211', createdAt: '2026-01-16', eventType: 'Solo', isVisible: true, registrationEnabled: true },
-  { id: 'ev3', name: 'Mech Core Quiz', category: 'Tech', description: 'Challenge your core mechanical engineering knowledge in this fast-paced quiz covering thermodynamics, fluid mechanics, manufacturing, and general aptitude.', rules: '1. Team of 2 members\n2. Three rounds: Prelims, Semis, Finals\n3. No electronic devices\n4. Judges decision is final\n5. Negative marking in finals', poster: '', coordinator: 'Karthik R', phone: '9876543212', createdAt: '2026-01-17', eventType: 'Team', isVisible: true, registrationEnabled: true },
-  { id: 'ev4', name: 'Legend in Lathe (Machining)', category: 'Tech', description: 'Showcase your practical workshop skills. Participants will be given a raw workpiece and a drawing to machine the exact component using a conventional Lathe machine within the given time.', rules: '1. Individual event\n2. Proper workshop attire (shoes) is mandatory\n3. Time limit: 2 hours\n4. Machining accuracy and finish will be evaluated\n5. Safety protocols must be strictly followed', poster: '', coordinator: 'Deepika S', phone: '9876543213', createdAt: '2026-01-18', eventType: 'Solo', isVisible: true, registrationEnabled: true },
-  { id: 'ev5', name: 'Connections', category: 'Non-Tech', description: 'A fun-filled visual puzzle game where you connect the dots between seemingly unrelated clues to arrive at a common answer. Test your lateral thinking!', rules: '1. Team of 2 members\n2. Multiple rounds\n3. Time-based scoring\n4. No electronic devices\n5. Judges decision is final', poster: '', coordinator: 'Vishnu K', phone: '9876543214', createdAt: '2026-01-19', eventType: 'Team', isVisible: true, registrationEnabled: true },
-  { id: 'ev6', name: 'Workshop on 3D Printing', category: 'Workshop', description: 'Hands-on workshop covering the fundamentals of additive manufacturing, 3D modeling for print, and practical experience with FDM 3D printers.', rules: '1. Individual participation\n2. Laptop required\n3. Software will be provided\n4. Certificate will be issued\n5. Limited seats available', poster: '', coordinator: 'Ramesh V', phone: '9876543215', createdAt: '2026-01-20', eventType: 'Solo', isVisible: true, registrationEnabled: true },
+  { id: 'ev1', name: 'Paper Presentation', category: 'Tech', description: 'Present your innovative ideas and research papers on emerging technologies in Mechanical Engineering. Showcase your knowledge and communication skills.', rules: '1. Team of 2 members\n2. Time limit: 8+2 minutes\n3. Abstract must be submitted prior\n4. PPT must be original work\n5. Topics related to Mechanical Engineering only', poster: '', coordinator: 'Arun Kumar S', phone: '9876543210', createdAt: '2026-01-15', eventType: 'Team', isVisible: true, registrationEnabled: true, fee: 150 },
+  { id: 'ev2', name: '3D CAD Modeling (Design Challenge)', category: 'Tech', description: 'Put your CAD skills to the test! Design complex components and assemblies using industry-standard software. Speed, accuracy, and design intent will be judged.', rules: '1. Individual event\n2. Software: SolidWorks / Fusion 360 / AutoCAD\n3. Time limit: 60 minutes\n4. 2D drafting to 3D model conversion\n5. Bring your own laptop (optional but recommended)', poster: '', coordinator: 'Priya M', phone: '9876543211', createdAt: '2026-01-16', eventType: 'Solo', isVisible: true, registrationEnabled: true, fee: 150 },
+  { id: 'ev3', name: 'Mech Core Quiz', category: 'Tech', description: 'Challenge your core mechanical engineering knowledge in this fast-paced quiz covering thermodynamics, fluid mechanics, manufacturing, and general aptitude.', rules: '1. Team of 2 members\n2. Three rounds: Prelims, Semis, Finals\n3. No electronic devices\n4. Judges decision is final\n5. Negative marking in finals', poster: '', coordinator: 'Karthik R', phone: '9876543212', createdAt: '2026-01-17', eventType: 'Team', isVisible: true, registrationEnabled: true, fee: 150 },
+  { id: 'ev4', name: 'Legend in Lathe (Machining)', category: 'Tech', description: 'Showcase your practical workshop skills. Participants will be given a raw workpiece and a drawing to machine the exact component using a conventional Lathe machine within the given time.', rules: '1. Individual event\n2. Proper workshop attire (shoes) is mandatory\n3. Time limit: 2 hours\n4. Machining accuracy and finish will be evaluated\n5. Safety protocols must be strictly followed', poster: '', coordinator: 'Deepika S', phone: '9876543213', createdAt: '2026-01-18', eventType: 'Solo', isVisible: true, registrationEnabled: true, fee: 150 },
+  { id: 'ev5', name: 'Connections', category: 'Non-Tech', description: 'A fun-filled visual puzzle game where you connect the dots between seemingly unrelated clues to arrive at a common answer. Test your lateral thinking!', rules: '1. Team of 2 members\n2. Multiple rounds\n3. Time-based scoring\n4. No electronic devices\n5. Judges decision is final', poster: '', coordinator: 'Vishnu K', phone: '9876543214', createdAt: '2026-01-19', eventType: 'Team', isVisible: true, registrationEnabled: true, fee: 150 },
+  { id: 'ev6', name: 'Workshop on 3D Printing', category: 'Workshop', description: 'Hands-on workshop covering the fundamentals of additive manufacturing, 3D modeling for print, and practical experience with FDM 3D printers.', rules: '1. Individual participation\n2. Laptop required\n3. Software will be provided\n4. Certificate will be issued\n5. Limited seats available', poster: '', coordinator: 'Ramesh V', phone: '9876543215', createdAt: '2026-01-20', eventType: 'Solo', isVisible: true, registrationEnabled: true, fee: 150 },
 ];
 
 const SEED_PARTICIPANTS = [
@@ -96,6 +96,8 @@ const SEED_CONTENT = {
     { icon: '🏫', title: '20+ Colleges', description: 'Participating institutions' },
     { icon: '💡', title: 'Workshops', description: 'Hands-on learning with industry experts' },
   ],
+  paymentQr: '',
+  paymentUpi: 'efficacy2026@ibl',
 };
 
 const DEFAULT_ADMIN = { username: 'admin', password: 'efficacy2026' };
@@ -103,10 +105,25 @@ const DEFAULT_ADMIN = { username: 'admin', password: 'efficacy2026' };
 // ===== INITIALIZATION =====
 export function initializeData() {
   // Force reset schema to fix undefined crashes
-  const currentVersion = '2.0';
+  const currentVersion = '2.1';
   if (localStorage.getItem('efficacy_version') !== currentVersion) {
-    localStorage.removeItem(KEYS.EVENTS);
-    localStorage.removeItem(KEYS.PARTICIPANTS);
+    // Migrate events to add missing 'fee'
+    let currentEvents = getStore(KEYS.EVENTS) || SEED_EVENTS;
+    let updatedEvents = currentEvents.map(ev => ({fee: 150, ...ev}));
+    setStore(KEYS.EVENTS, updatedEvents);
+
+    // Migrate content to add missing payment info
+    let currentContent = getStore(KEYS.CONTENT) || SEED_CONTENT;
+    if (!currentContent.paymentUpi) {
+      currentContent.paymentUpi = 'efficacy2026@ibl';
+      currentContent.paymentQr = '';
+      setStore(KEYS.CONTENT, currentContent);
+    }
+    
+    // Legacy drop
+    if (!localStorage.getItem('efficacy_version') || localStorage.getItem('efficacy_version') < '2.0') {
+      localStorage.removeItem(KEYS.PARTICIPANTS);
+    }
     localStorage.setItem('efficacy_version', currentVersion);
   }
 

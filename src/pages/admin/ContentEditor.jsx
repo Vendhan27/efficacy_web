@@ -17,6 +17,15 @@ export default function ContentEditor() {
     setContent({ ...content, highlights });
   };
 
+  const handlePaymentQrUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (ev) => setContent({ ...content, paymentQr: ev.target.result });
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div>
       <h1 className="admin-page-title">Website Content Editor</h1>
@@ -72,6 +81,26 @@ export default function ContentEditor() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="admin-card">
+        <h3 style={{ fontWeight: 600, marginBottom: '1rem' }}>Payment Settings</h3>
+        <div className="admin-form">
+          <div className="form-group">
+            <label>Payment UPI ID</label>
+            <input type="text" value={content.paymentUpi || ''} onChange={e => setContent({ ...content, paymentUpi: e.target.value })} placeholder="e.g. your_upi@okbank" />
+          </div>
+          <div className="form-group">
+            <label>Payment QR Code Image</label>
+            <input type="file" accept="image/*" onChange={handlePaymentQrUpload} />
+            {content.paymentQr && (
+              <div style={{ marginTop: '1rem', padding: '1rem', border: '1px dashed var(--border-color)', borderRadius: '0.5rem', display: 'inline-block' }}>
+                <img src={content.paymentQr} alt="Payment QR" style={{ width: '150px', height: '150px', objectFit: 'contain' }} />
+                <button className="btn btn-secondary btn-sm" style={{ display: 'block', marginTop: '0.5rem', width: '100%' }} onClick={() => setContent({ ...content, paymentQr: '' })}>Remove QR</button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

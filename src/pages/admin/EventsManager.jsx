@@ -4,12 +4,12 @@ import { getEvents, addEvent, updateEvent, deleteEvent } from '../../data/dataSe
 export default function EventsManager() {
   const [events, setEvents] = useState(() => getEvents());
   const [modal, setModal] = useState(null);
-  const [form, setForm] = useState({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '', eventType: 'Solo', isVisible: true, registrationEnabled: true });
+  const [form, setForm] = useState({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '', eventType: 'Solo', isVisible: true, registrationEnabled: true, fee: 150 });
 
   const refresh = () => setEvents(getEvents());
 
   const openAdd = () => {
-    setForm({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '', eventType: 'Solo', isVisible: true, registrationEnabled: true });
+    setForm({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '', eventType: 'Solo', isVisible: true, registrationEnabled: true, fee: 150 });
     setModal('add');
   };
 
@@ -23,7 +23,8 @@ export default function EventsManager() {
       phone: ev.phone,
       eventType: ev.eventType || 'Solo',
       isVisible: ev.isVisible ?? true,
-      registrationEnabled: ev.registrationEnabled ?? true
+      registrationEnabled: ev.registrationEnabled ?? true,
+      fee: ev.fee ?? 150
     });
     setModal(ev);
   };
@@ -69,6 +70,7 @@ export default function EventsManager() {
               <tr>
                 <th>Event Name</th>
                 <th>Type</th>
+                <th>Fee</th>
                 <th>Coordinator</th>
                 <th>Poster</th>
                 <th>Visibility</th>
@@ -81,6 +83,7 @@ export default function EventsManager() {
                 <tr key={ev.id}>
                   <td><strong>{ev.name}</strong></td>
                   <td>{ev.eventType || 'Solo'}</td>
+                  <td>₹{ev.fee ?? 150}</td>
                   <td>{ev.coordinator}<br/><small className="text-tertiary">{ev.phone}</small></td>
                   <td>{ev.poster ? '✅' : '—'}</td>
                   <td>{ev.isVisible !== false ? <span className="status-badge active">Visible</span> : <span className="status-badge inactive">Hidden</span>}</td>
@@ -113,6 +116,10 @@ export default function EventsManager() {
                   <option value="Solo">Solo Event</option>
                   <option value="Team">Team Event (Up to 4)</option>
                 </select>
+              </div>
+              <div className="form-group">
+                <label>Registration Fee (₹)</label>
+                <input type="number" min="0" value={form.fee} onChange={e => setForm({ ...form, fee: Number(e.target.value) })} required />
               </div>
               <div className="form-group">
                 <label>Coordinator Name</label>

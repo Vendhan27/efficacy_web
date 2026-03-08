@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getEvent, addParticipant } from '../data/dataService';
+import { getEvent, addParticipant, getContent } from '../data/dataService';
 import emailjs from '@emailjs/browser';
-import BackButton from '../components/BackButton';
 import './Register.css';
 
 export default function Register() {
   const { id } = useParams();
   const navigate = useNavigate();
   const event = getEvent(id);
+  const content = getContent();
 
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -194,13 +194,16 @@ export default function Register() {
               </div>
               
               <div className="payment-instructions" style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <p>Registration Fee: <strong>₹150</strong></p>
+                <p>Registration Fee: <strong className="golden-text">₹{event.fee ?? 150}</strong></p>
                 <div style={{ background: '#f8fafc', padding: '2rem', borderRadius: '1rem', border: '2px dashed var(--border-color)', margin: '1.5rem auto', maxWidth: '300px' }}>
-                  {/* PLACEHOLDER QR CODE */}
-                  <div style={{ width: '150px', height: '150px', background: 'var(--border-color)', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    📦 QR Code Placeholder
-                  </div>
-                  <p style={{ fontSize: '0.875rem' }}>UPI ID: efficacy2026@ibl</p>
+                  {content.paymentQr ? (
+                    <img src={content.paymentQr} alt="Payment QR" style={{ width: '100%', height: 'auto', borderRadius: '0.5rem', marginBottom: '1rem' }} />
+                  ) : (
+                    <div style={{ width: '150px', height: '150px', background: 'var(--border-color)', margin: '0 auto 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.875rem', textAlign: 'center', padding: '1rem' }}>
+                      QR Code Unavailable
+                    </div>
+                  )}
+                  <p style={{ fontSize: '1rem', fontWeight: 600 }}>UPI ID: {content.paymentUpi}</p>
                 </div>
                 <p className="text-secondary" style={{ fontSize: '0.875rem' }}>Scan the QR code to pay, then enter the Transaction ID below.</p>
               </div>
