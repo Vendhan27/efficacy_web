@@ -7,11 +7,11 @@ export default function EventDetail() {
   const { id } = useParams();
   const event = getEvent(id);
 
-  if (!event) {
+  if (!event || event.isVisible === false) {
     return (
       <div className="event-detail-page">
         <div className="section container" style={{ textAlign: 'center', paddingTop: '4rem' }}>
-          <h2>Event not found</h2>
+          <h2>Event not found or unavailable</h2>
           <BackButton />
         </div>
       </div>
@@ -24,7 +24,6 @@ export default function EventDetail() {
     <div className="event-detail-page">
       <div className="section">
         <div className="container">
-          <BackButton />
           <div className="event-detail">
             <div className="event-detail-poster">
               {event.poster ? (
@@ -34,7 +33,24 @@ export default function EventDetail() {
               )}
             </div>
             <div className="event-detail-info">
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <span className="status-badge active">{event.category}</span>
+                {event.eventType === 'Team' ? (
+                  <span className="status-badge pending" style={{ background: 'var(--accent-orange)' }}>Team Event (Up to 4)</span>
+                ) : (
+                  <span className="status-badge" style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>Solo Event</span>
+                )}
+              </div>
+              
               <h1 className="event-detail-title">{event.name}</h1>
+
+              <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+                {event.registrationEnabled !== false ? (
+                  <Link to={`/register/${event.id}`} className="btn btn-primary btn-lg" style={{ width: '100%', textAlign: 'center' }}>Register Now</Link>
+                ) : (
+                  <button className="btn btn-secondary btn-lg" disabled style={{ width: '100%', opacity: 0.6 }}>Registration Closed</button>
+                )}
+              </div>
 
               <div className="event-detail-section">
                 <h3>📋 Description</h3>

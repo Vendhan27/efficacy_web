@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getAnalytics } from '../../data/dataService';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Title, Tooltip, Legend, Filler } from 'chart.js';
@@ -7,11 +7,7 @@ import './Dashboard.css';
 ChartJS.register(CategoryScale, LinearScale, BarElement, PointElement, LineElement, ArcElement, Title, Tooltip, Legend, Filler);
 
 export default function Dashboard() {
-  const [analytics, setAnalytics] = useState(null);
-
-  useEffect(() => {
-    setAnalytics(getAnalytics());
-  }, []);
+  const [analytics] = useState(() => getAnalytics());
 
   if (!analytics) return null;
 

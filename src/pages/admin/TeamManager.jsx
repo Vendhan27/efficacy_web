@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getTeam, addMember, updateMember, deleteMember } from '../../data/dataService';
 
 const SECTIONS = ['Faculty Coordinators', 'Student Coordinators', 'IT Wing', 'Volunteers'];
 
 export default function TeamManager() {
-  const [team, setTeam] = useState([]);
+  const [team, setTeam] = useState(() => getTeam());
   const [modal, setModal] = useState(null);
   const [form, setForm] = useState({ name: '', role: '', department: 'Mechanical Engineering', photo: '', linkedin: '', section: SECTIONS[0] });
-
-  useEffect(() => { setTeam(getTeam()); }, []);
   const refresh = () => setTeam(getTeam());
 
   const openAdd = () => {

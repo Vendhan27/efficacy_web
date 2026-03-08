@@ -1,22 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getEvents, addEvent, updateEvent, deleteEvent } from '../../data/dataService';
 
 export default function EventsManager() {
-  const [events, setEvents] = useState([]);
-  const [modal, setModal] = useState(null); // null | 'add' | event object
-  const [form, setForm] = useState({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '' });
-
-  useEffect(() => { setEvents(getEvents()); }, []);
+  const [events, setEvents] = useState(() => getEvents());
+  const [modal, setModal] = useState(null);
+  const [form, setForm] = useState({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '', eventType: 'Solo', isVisible: true, registrationEnabled: true });
 
   const refresh = () => setEvents(getEvents());
 
   const openAdd = () => {
-    setForm({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '' });
+    setForm({ name: '', description: '', rules: '', poster: '', coordinator: '', phone: '', eventType: 'Solo', isVisible: true, registrationEnabled: true });
     setModal('add');
   };
 
   const openEdit = (ev) => {
-    setForm({ name: ev.name, description: ev.description, rules: ev.rules, poster: ev.poster || '', coordinator: ev.coordinator, phone: ev.phone });
+    setForm({ 
+      name: ev.name, 
+      description: ev.description, 
+      rules: ev.rules, 
+      poster: ev.poster || '', 
+      coordinator: ev.coordinator, 
+      phone: ev.phone,
+      eventType: ev.eventType || 'Solo',
+      isVisible: ev.isVisible ?? true,
+      registrationEnabled: ev.registrationEnabled ?? true
+    });
     setModal(ev);
   };
 
@@ -60,9 +68,11 @@ export default function EventsManager() {
             <thead>
               <tr>
                 <th>Event Name</th>
+                <th>Type</th>
                 <th>Coordinator</th>
-                <th>Phone</th>
                 <th>Poster</th>
+                <th>Visibility</th>
+                <th>Registration</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -70,9 +80,11 @@ export default function EventsManager() {
               {events.map(ev => (
                 <tr key={ev.id}>
                   <td><strong>{ev.name}</strong></td>
-                  <td>{ev.coordinator}</td>
-                  <td>{ev.phone}</td>
+                  <td>{ev.eventType || 'Solo'}</td>
+                  <td>{ev.coordinator}<br/><small className="text-tertiary">{ev.phone}</small></td>
                   <td>{ev.poster ? '✅' : '—'}</td>
+                  <td>{ev.isVisible !== false ? <span className="status-badge active">Visible</span> : <span className="status-badge inactive">Hidden</span>}</td>
+                  <td>{ev.registrationEnabled !== false ? <span className="status-badge active">Open</span> : <span className="status-badge pending">Closed</span>}</td>
                   <td>
                     <div className="actions-cell">
                       <button className="btn btn-secondary btn-sm" onClick={() => openEdit(ev)}>Edit</button>
@@ -96,6 +108,13 @@ export default function EventsManager() {
                 <input type="text" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
               </div>
               <div className="form-group">
+                <label>Event Type</label>
+                <select value={form.eventType} onChange={e => setForm({ ...form, eventType: e.target.value })}>
+                  <option value="Solo">Solo Event</option>
+                  <option value="Team">Team Event (Up to 4)</option>
+                </select>
+              </div>
+              <div className="form-group">
                 <label>Coordinator Name</label>
                 <input type="text" value={form.coordinator} onChange={e => setForm({ ...form, coordinator: e.target.value })} required />
               </div>
@@ -106,6 +125,18 @@ export default function EventsManager() {
               <div className="form-group">
                 <label>Poster Image</label>
                 <input type="file" accept="image/*" onChange={handlePosterUpload} />
+              </div>
+              <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
+                <label style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                  <input type="checkbox" checked={form.isVisible} onChange={e => setForm({ ...form, isVisible: e.target.checked })} />
+                  Show Event on Website
+                </label>
+              </div>
+              <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
+                <label style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                  <input type="checkbox" checked={form.registrationEnabled} onChange={e => setForm({ ...form, registrationEnabled: e.target.checked })} />
+                  Enable Registration (Open)
+                </label>
               </div>
               <div className="form-group full-width">
                 <label>Description</label>

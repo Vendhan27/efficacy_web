@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getAlbums, addAlbum, renameAlbum, deleteAlbum, addImageToAlbum, deleteImage } from '../../data/dataService';
 
 export default function GalleryManager() {
-  const [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState(() => getAlbums());
   const [newAlbumName, setNewAlbumName] = useState('');
   const [addImageModal, setAddImageModal] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [imageCaption, setImageCaption] = useState('');
-
-  useEffect(() => { setAlbums(getAlbums()); }, []);
   const refresh = () => setAlbums(getAlbums());
 
   const handleAddAlbum = () => {

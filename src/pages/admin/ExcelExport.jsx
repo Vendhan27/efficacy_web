@@ -7,25 +7,32 @@ export default function ExcelExport() {
     const events = getEvents();
 
     // Sheet 1: Participants Master
-    const masterData = participants.map((p, i) => ({
+    const masterData = participants.map(p => ({
       'Participant_ID': p.id,
-      'Name': p.name,
+      'Event_Name': p.eventName,
+      'Name_(Leader)': p.name,
+      'Team_Name': p.teamName || 'Solo',
+      'Member_2': p.teamMembers?.[0] || '',
+      'Member_3': p.teamMembers?.[1] || '',
+      'Member_4': p.teamMembers?.[2] || '',
       'College_Name': p.college,
       'Department': p.department,
       'Year': p.year,
       'Phone_Number': p.phone,
       'Email': p.email,
-      'Event_Name': p.eventName,
       'Payment_Status': p.paymentStatus,
+      'Transaction_ID': p.transactionId || '',
       'Registration_Date': p.registrationDate,
     }));
 
     // Sheet 2: Event Registrations
     const eventRegData = participants.map(p => ({
       'Participant_ID': p.id,
-      'Name': p.name,
       'Event_Name': p.eventName,
+      'Name_(Leader)': p.name,
+      'Team_Name': p.teamName || 'Solo',
       'College_Name': p.college,
+      'Transaction_ID': p.transactionId || '',
       'Registration_Date': p.registrationDate,
     }));
 

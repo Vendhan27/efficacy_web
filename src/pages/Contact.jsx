@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Contact.css';
 import BackButton from '../components/BackButton';
 
@@ -17,7 +18,6 @@ export default function Contact() {
       <div className="page-hero">
         <div className="page-hero-bg"></div>
         <div className="container">
-          <BackButton />
           <h1 className="page-hero-title">Contact Us</h1>
           <p className="page-hero-subtitle">Get in touch with us</p>
         </div>

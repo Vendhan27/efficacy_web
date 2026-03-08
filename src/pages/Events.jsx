@@ -6,16 +6,15 @@ import './Events.css';
 export default function Events() {
   const allEvents = getEvents();
   
-  const techEvents = allEvents.filter(ev => ev.category === 'Tech');
-  const nonTechEvents = allEvents.filter(ev => ev.category === 'Non-Tech');
-  const workshops = allEvents.filter(ev => ev.category === 'Workshop');
+  const techEvents = allEvents.filter(ev => ev.category === 'Tech' && ev.isVisible !== false);
+  const nonTechEvents = allEvents.filter(ev => ev.category === 'Non-Tech' && ev.isVisible !== false);
+  const workshops = allEvents.filter(ev => ev.category === 'Workshop' && ev.isVisible !== false);
 
   return (
     <div className="events-page">
       <div className="page-hero">
         <div className="page-hero-bg"></div>
         <div className="container">
-          <BackButton />
           <h1 className="page-hero-title">Events</h1>
           <p className="page-hero-subtitle">Compete, collaborate, and conquer</p>
         </div>
@@ -44,7 +43,11 @@ export default function Events() {
                   <h3 className="event-card-title">{ev.name}</h3>
                   <p className="event-card-desc">{ev.description?.substring(0, 100)}...</p>
                   <div className="event-card-action">
-                    <span className="btn btn-primary btn-sm register-btn">Register Now</span>
+                    {ev.registrationEnabled !== false ? (
+                      <span className="btn btn-primary btn-sm register-btn">Register Now</span>
+                    ) : (
+                      <span className="btn btn-secondary btn-sm register-btn" style={{opacity: 0.6}}>Closed</span>
+                    )}
                   </div>
                   <div className="event-card-footer">
                     <span className="event-card-coordinator">👤 {ev.coordinator}</span>
@@ -79,7 +82,11 @@ export default function Events() {
                   <h3 className="event-card-title">{ev.name}</h3>
                   <p className="event-card-desc">{ev.description?.substring(0, 100)}...</p>
                   <div className="event-card-action">
-                    <span className="btn btn-primary btn-sm register-btn">Register Now</span>
+                    {ev.registrationEnabled !== false ? (
+                      <span className="btn btn-primary btn-sm register-btn">Register Now</span>
+                    ) : (
+                      <span className="btn btn-secondary btn-sm register-btn" style={{opacity: 0.6}}>Closed</span>
+                    )}
                   </div>
                   <div className="event-card-footer">
                     <span className="event-card-coordinator">👤 {ev.coordinator}</span>
@@ -114,7 +121,11 @@ export default function Events() {
                   <h3 className="event-card-title">{ev.name}</h3>
                   <p className="event-card-desc">{ev.description?.substring(0, 100)}...</p>
                   <div className="event-card-action">
-                    <span className="btn btn-primary btn-sm register-btn">Register Now</span>
+                    {ev.registrationEnabled !== false ? (
+                      <span className="btn btn-primary btn-sm register-btn">Register Now</span>
+                    ) : (
+                      <span className="btn btn-secondary btn-sm register-btn" style={{opacity: 0.6}}>Closed</span>
+                    )}
                   </div>
                   <div className="event-card-footer">
                     <span className="event-card-coordinator">👤 {ev.coordinator}</span>

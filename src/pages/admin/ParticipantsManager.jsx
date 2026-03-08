@@ -1,14 +1,12 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { getParticipants } from '../../data/dataService';
 
 export default function ParticipantsManager() {
-  const [participants, setParticipants] = useState([]);
+  const [participants] = useState(() => getParticipants());
   const [search, setSearch] = useState('');
   const [filterEvent, setFilterEvent] = useState('');
   const [filterCollege, setFilterCollege] = useState('');
   const [filterPayment, setFilterPayment] = useState('');
-
-  useEffect(() => { setParticipants(getParticipants()); }, []);
 
   const events = useMemo(() => [...new Set(participants.map(p => p.eventName))], [participants]);
   const colleges = useMemo(() => [...new Set(participants.map(p => p.college))], [participants]);
@@ -60,7 +58,9 @@ export default function ParticipantsManager() {
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Event</th>
+                <th>Team Info</th>
                 <th>Payment</th>
+                <th>Transaction ID</th>
                 <th>Date</th>
               </tr>
             </thead>
@@ -75,7 +75,16 @@ export default function ParticipantsManager() {
                   <td>{p.email}</td>
                   <td>{p.phone}</td>
                   <td>{p.eventName}</td>
+                  <td>
+                    {p.teamName ? (
+                      <div>
+                        <strong>{p.teamName}</strong>
+                        {p.teamMembers?.length > 0 && <div style={{fontSize:'0.75rem', color:'var(--text-tertiary)'}}>+{p.teamMembers.length} members</div>}
+                      </div>
+                    ) : 'Solo'}
+                  </td>
                   <td><span className={`status-badge ${p.paymentStatus.toLowerCase()}`}>{p.paymentStatus}</span></td>
+                  <td><code style={{fontSize:'0.75rem'}}>{p.transactionId || '—'}</code></td>
                   <td>{p.registrationDate}</td>
                 </tr>
               ))}

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect, Component } from 'react';
 import { initializeData, isAuthenticated } from './data/dataService';
 
 import Navbar from './components/Navbar';
@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Events from './pages/Events';
 import EventDetail from './pages/EventDetail';
+import Register from './pages/Register';
 import Gallery from './pages/Gallery';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
@@ -24,15 +25,48 @@ import ContentEditor from './pages/admin/ContentEditor';
 import ExcelExport from './pages/admin/ExcelExport';
 import Settings from './pages/admin/Settings';
 
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({ error, errorInfo });
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '2rem', background: '#fee2e2', color: '#991b1b', fontFamily: 'monospace', minHeight: '100vh', zIndex: 9999, position: 'relative' }}>
+          <h2>Something went wrong in this component:</h2>
+          <details style={{ whiteSpace: 'pre-wrap', marginTop: '1rem', background: '#fff', padding: '1rem', border: '1px solid #fca5a5' }}>
+            {this.state.error && this.state.error.toString()}
+            <br />
+            {this.state.errorInfo && this.state.errorInfo.componentStack}
+          </details>
+          <button onClick={() => window.location.href = '/'} style={{ marginTop: '1rem', padding: '0.5rem 1rem', background: '#ef4444', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Return Home</button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 function PublicLayout() {
   return (
-    <>
+    <ErrorBoundary>
       <Navbar />
       <main>
         <Outlet />
       </main>
       <Footer />
-    </>
+    </ErrorBoundary>
   );
 }
 
@@ -70,7 +104,7 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         {/* Public Pages */}
         <Route element={<ScrollToTopWrapper />}>
@@ -79,6 +113,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:id" element={<EventDetail />} />
+            <Route path="/register/:id" element={<Register />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
@@ -92,7 +127,9 @@ export default function App() {
             path="/admin"
             element={
               <ProtectedRoute>
-                <AdminLayout />
+                <ErrorBoundary>
+                  <AdminLayout />
+                </ErrorBoundary>
               </ProtectedRoute>
             }
           >

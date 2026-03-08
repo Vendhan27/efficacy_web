@@ -15,7 +15,6 @@ export default function Gallery() {
       <div className="page-hero">
         <div className="page-hero-bg"></div>
         <div className="container">
-          <BackButton />
           <h1 className="page-hero-title">Gallery</h1>
           <p className="page-hero-subtitle">Memories from <span className="golden-text" style={{fontWeight: 600}}>EFFICACY'26</span></p>
         </div>

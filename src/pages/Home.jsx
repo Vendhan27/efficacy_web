@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getEvents, getAlbums, getTeam, getContent } from '../data/dataService';
 import './Home.css';
@@ -25,19 +25,23 @@ export default function Home() {
   const team = getTeam().filter(m => m.section === 'Student Coordinators').slice(0, 4);
   const pageRef = useReveal();
 
+  const [particleStyles] = useState(() => {
+    return [...Array(20)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      animationDuration: `${3 + Math.random() * 4}s`
+    }));
+  });
+
   return (
     <div className="home-page" ref={pageRef}>
       {/* Hero */}
       <section className="hero">
         <div className="hero-bg">
           <div className="hero-particles">
-            {[...Array(20)].map((_, i) => (
-              <div key={i} className="particle" style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`
-              }} />
+            {particleStyles.map((style, i) => (
+              <div key={i} className="particle" style={style} />
             ))}
           </div>
           <div className="hero-grid-lines"></div>

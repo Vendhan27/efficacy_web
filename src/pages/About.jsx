@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import './About.css';
 import BackButton from '../components/BackButton';
 
@@ -22,7 +23,6 @@ export default function About() {
       <div className="page-hero">
         <div className="page-hero-bg"></div>
         <div className="container">
-          <BackButton />
           <h1 className="page-hero-title">About Us</h1>
           <p className="page-hero-subtitle">Learn about our department, association, and symposium</p>
         </div>

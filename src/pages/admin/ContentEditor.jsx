@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getContent, updateContent } from '../../data/dataService';
 
 export default function ContentEditor() {
-  const [content, setContent] = useState(getContent());
+  const [content, setContent] = useState(() => getContent());
   const [saved, setSaved] = useState(false);
-
-  useEffect(() => { setContent(getContent()); }, []);
 
   const handleSave = () => {
     updateContent(content);
